@@ -1,3 +1,8 @@
+#프로젝트 캘린더 프론트엔드 부분 타입스크립트로 변경한 내용
+
+calendar-frontend 프로젝트 내용 typescript로 변경한 내용이며, 앞으로는 해당 프로젝트 이용 예정
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
