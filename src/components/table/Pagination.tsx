@@ -14,23 +14,25 @@ const PaginationBlock = styled.div`
 
 const PageNumber = styled.div``;
 
-const buildLink = ({ username, page }) => {
+const buildLink = ({ username, page }:any) => {
     const query = qs.stringify({ page });
     return username ? `/${username}?${query}` : `/?${query}`;
 };
-const Pagination = ({ page, lastPage }) => {
+const Pagination = ({ page, lastPage }:any) => {
+    const prevFlag = page === 1? true : false;
+    const nextFlag = page === lastPage? true : false;
     return (
         <PaginationBlock>
             {page === 1 ? (
-                <Button disabled={page === 1}>이전</Button>
+                <Button disabled={prevFlag}>이전</Button>
             ):(
-                <Link disabled={page === 1} to={buildLink({ username: 'table', page: page-1 })} className="btn btn-primary">이전</Link>
+                <Link  to={buildLink({ username: 'table', page: page-1 })} className="btn btn-primary">이전</Link>
             )}
             <PageNumber>{page}</PageNumber>
             {page === lastPage ? (
-                <Button disabled={page === lastPage}>다음</Button>
+                <Button disabled={nextFlag}>다음</Button>
             ):(
-                <Link disabled={page === lastPage} to={buildLink({ username: 'table', page: page+1 })} className="btn btn-primary">다음</Link>
+                <Link  to={buildLink({ username: 'table', page: page+1 })} className="btn btn-primary">다음</Link>
             )}
             
         </PaginationBlock>
