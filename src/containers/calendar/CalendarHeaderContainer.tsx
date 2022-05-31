@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CalendarHeader from "../../components/calendar/CalendarHeader";
@@ -7,6 +7,11 @@ import { changeCalendar, changeWrite, changeModal, changeSubWrite } from "../../
 import { changeForm } from "../../modules/form";
 import { tableout } from "../../modules/tables";
 
+
+const getCalendarName = (viewYear:string, viewMonth:string) => {
+    const name = `${viewYear}년 ${viewMonth}월`;
+    return name;
+}
 
 const CalendarHeaderContainer = () => {
     const dispatch = useDispatch();
@@ -18,6 +23,8 @@ const CalendarHeaderContainer = () => {
         user: user.user,
         tableCalendar: tables.tableCalendar,
     }));
+
+    const headerNmae = useMemo(() => getCalendarName(viewYear, viewMonth),[viewMonth, viewYear]);
 
     const onClick = useCallback((idx:number) => {
         const thisDate = new Date(parseInt(viewYear+''), parseInt(viewMonth+''), 0);
@@ -89,8 +96,7 @@ const CalendarHeaderContainer = () => {
     return (
         <CalendarHeader 
             user={user} 
-            viewYear={viewYear} 
-            viewMonth={viewMonth} 
+            headerNmae={headerNmae}
             tableCalendar={tableCalendar} 
             onClick={onClick} 
             onModalClick={onModalClick} 
