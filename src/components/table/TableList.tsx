@@ -1,4 +1,5 @@
 
+import { KeyboardEvent } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getTableListDB } from "../../types";
@@ -10,9 +11,9 @@ type TableListProps = {
   loading: any;
   tableError: any;
   error: string[];
-  onClick: (id:any) => void;
-  onKeyUp: (e:any) => void;
-  onDelClick: (id:any) => void;
+  onClick: (id:string) => void;
+  onKeyUp: (e:KeyboardEvent) => void;
+  onDelClick: (id:string) => void;
 }
 
 const TableList = ({tableList, user, loading, tableError, error, onClick, onKeyUp, onDelClick}:TableListProps) => {

@@ -67,7 +67,7 @@ type CalendarMonthListProps = {
     dates: Array<any>;
     viewDate: string;
     error: any;
-    onClick: (fullDate: any) => void;
+    onClick: (fullDate: string) => void;
 }
 
 const CalendarMonthList = ({loading, dates, viewDate, error, onClick}: CalendarMonthListProps) => {

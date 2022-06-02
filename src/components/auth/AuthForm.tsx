@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import palette from "../../lib/styles/palette";
 import Button from "../common/Button";
+import { ChangeEvent, FormEvent } from "react";
 
 /* 
     회원가입 또는 로그인 폼을 보여 줍니다.
@@ -67,8 +68,8 @@ const textMap = {
 type AuthFormProps = {
     type: any;
     form: any;
-    onChange:(e:any) => void;
-    onSubmit:(e:any) => void;
+    onChange:(e:ChangeEvent<HTMLInputElement>) => void;
+    onSubmit:(e:FormEvent) => void;
     error: any;
 }
 

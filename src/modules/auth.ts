@@ -9,26 +9,25 @@ const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 
 //리덕스 모듈에서 API를 사용할 수 있게 추가
 const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes('auth/REGISTER',);
-
 const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes('auth/LOGIN',);
 
 export const changeField = createAction(
     CHANGE_FINELD,
-    ({ form, key, value }:any) => ({
+    ({ form, key, value }:authAPI.AuthApistate) => ({
         form, // register, login
         key, // username, password, passwordConfirm
         value, // 실제 바꾸려는 값
     }),
 );
 
-export const initializeForm = createAction(INITIALIZE_FORM, (form:any) => form); // register / login
+export const initializeForm = createAction(INITIALIZE_FORM, (form:string) => form); // register / login
 
-export const register = createAction(REGISTER, ({ username, password}:any) => ({
+export const register = createAction(REGISTER, ({ username, password}:authAPI.AuthApistate) => ({
     username,
     password,
 }));
 
-export const login = createAction(LOGIN, ({ username, password}:any) => ({
+export const login = createAction(LOGIN, ({ username, password}:authAPI.AuthApistate) => ({
     username,
     password
 }));

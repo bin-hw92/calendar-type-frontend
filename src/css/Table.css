@@ -64,6 +64,7 @@
 }
 .table-list-item > .item-body {
     padding: 20px 0 30px 0;
+    white-space: pre-wrap;
 }
 .item-top-error {
     padding: 10px 0;

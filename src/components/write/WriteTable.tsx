@@ -1,4 +1,5 @@
 
+import { ChangeEvent, FormEvent } from "react";
 import { Button, Form } from "react-bootstrap";
 import styled from "styled-components";
 import "../../css/Table.css";
@@ -13,15 +14,15 @@ const ErrorMessage = styled.div`
 
 type WriteTableProps = {
     table: {
-        title: any;
-        body: any;
-        password: any;
-        users: any[];
+        title: string;
+        body: string;
+        password: string;
+        users: string[];
     };
     error: (string|number)[];
-    onChange: (e: any) => void;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
     onCancel: () => void;
-    onSubmit: (e: any) => void
+    onSubmit: (e: FormEvent) => void
 }
 
 const WriteTable = ({ table, error, onSubmit, onCancel, onChange }:WriteTableProps) => {

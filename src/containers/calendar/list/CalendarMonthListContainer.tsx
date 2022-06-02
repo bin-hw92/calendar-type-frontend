@@ -39,7 +39,7 @@ const CalendarMonthListContainer = () => {
         setDates(thisDates);
     },[calendarList, holidayList, viewMonth, viewYear]);
 
-    const onClick = useCallback((fullDate:any) => {
+    const onClick = useCallback((fullDate:string) => {
         const DateArray = fullDate.split('.');
         dispatch(changeCalendar({
             viewYear: DateArray[0],

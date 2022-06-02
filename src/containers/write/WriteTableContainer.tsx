@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -19,11 +19,10 @@ const WriteTableContainer = () => {
     const navigate = useNavigate();
 
     //인풋 변경 이벤트 핸들러
-    const onChange = (e:any) => {
+    const onChange = (e:ChangeEvent<HTMLInputElement>) => {
         const { value, name } = e.target;
         dispatch(
             changeField({
-                form: 'table',
                 key: name,
                 value
             })
@@ -31,7 +30,7 @@ const WriteTableContainer = () => {
     };
 
     //폼 등록 이벤트 핸들러
-    const onSubmit = (e:any) => {
+    const onSubmit = (e:FormEvent) => {
         e.preventDefault();
         const { title, password, body, users} = table;
         if(title === ''){

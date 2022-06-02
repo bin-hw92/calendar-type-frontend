@@ -5,6 +5,7 @@ import "../../css/Todo.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import styled from "styled-components";
+import { ChangeEvent, FormEvent } from "react";
 
 /* 에러를 보여줍니다. */
 const ErrorMessage = styled.div`
@@ -21,7 +22,7 @@ type LabelItemProps = {
         color: string;
     }[];
     labelStyle: string;
-    onStyleClick: (id: any) => void;
+    onStyleClick: (id: number) => void;
 }
 
 const LabelItem = ({labels, labelStyle, onStyleClick }:LabelItemProps) => {
@@ -66,12 +67,12 @@ type WriteViewProps = {
         labelText: string;
     }
     error: string[];
-    onChange: (e: any) => void;
-    onDateChange: (date: any, type: any) => void;
-    onSubmit: (e: any) => void;
-    onInputChange: (e: any) => void;
-    calendarId: any;
-    onStyleClick: (id: any) => void;
+    onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+    onDateChange: (date: Date, type: string) => void;
+    onSubmit: (e: FormEvent) => void;
+    onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    calendarId: string|null;
+    onStyleClick: (id: number) => void;
 }
 
 const WriteView = ({ write, error, onChange, onDateChange, onSubmit, onInputChange, calendarId, onStyleClick }:WriteViewProps) => {
@@ -93,7 +94,7 @@ const WriteView = ({ write, error, onChange, onDateChange, onSubmit, onInputChan
                     <div>
                         <DatePicker 
                             locale={ko} 
-                            onChange={(date:any) => onDateChange(date, "START")} 
+                            onChange={(date:Date) => onDateChange(date, "START")} 
                             value={sDate.toDateString()}
                             selected={sDate}
                             dateFormat="yyyy.MM.dd"

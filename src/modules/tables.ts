@@ -18,26 +18,29 @@ const [DELETE_TABLE, DELETE_TABLE_SUCCESS, DELETE_TABLE_FAILURE] = createRequest
 //비밀번호 확인
 const [CHECK_TABLE, CHECK_TABLE_SUCCESS, CHECK_TABLE_FAILURE] = createRequestActionTypes('table/CHECK_TABLE');
 
-export const tempSetTable = createAction(TEMP_SET_TABLE, (tableCalendar:any) => tableCalendar);
+
+export const tempSetTable = createAction(TEMP_SET_TABLE, (tableCalendar:string) => tableCalendar);
 export const initialize = createAction(INITIALIZE);
 
 export const tableout = createAction(TABLE_OUT);
 
 export const checkTable = createAction(CHECK_TABLE, 
-    ({id, password}:any) => ({
+    ({id, password}:tableAPI.tableActionState) => ({
         id,
         password, 
     }),
 ); 
 
+
 export const changeField = createAction(
     CHANGE_FINELD,
-    ({ key, value }:any) => ({
+    ({ key, value }:tableAPI.tableActionState) => ({
         key, // title, body, password, users
         value, // 실제 바꾸려는 값
     }),
 );
-export const writeTable = createAction(WRITE_TABLE, ({ title, password, body, users}:any) => ({
+
+export const writeTable = createAction(WRITE_TABLE, ({ title, password, body, users}:tableAPI.tableWirteState) => ({
     title,
     password,
     body,
@@ -45,11 +48,9 @@ export const writeTable = createAction(WRITE_TABLE, ({ title, password, body, us
 }));
 
 
-export const listTable = createAction(LIST_TABLE, ({ page }:any) => ({
-    page
-}));
+export const listTable = createAction(LIST_TABLE, (page:number) => (page));
 
-export const deleteTable = createAction(DELETE_TABLE, ({id}:any) => ({id}));
+export const deleteTable = createAction(DELETE_TABLE, (id:string) => (id));
 
 //사가 생성
 const writeTableSaga = createRequestSaga(WRITE_TABLE, tableAPI.writeTable);
@@ -86,10 +87,10 @@ export function* tablesSaga() {
 
 export interface TableState {
     table: {
-        title: any;
-        body: any;
-        password: any;
-        users: any[];
+        title: string;
+        body: string;
+        password: string;
+        users: string[];
     };
     tableList: getTableListDB[]|null;
     lastPage: number;

@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import "../../css/Todo.css";
 import { getCalendarListDb } from "../../types";
 import Loading from "../common/Loading";
@@ -20,7 +21,7 @@ const TimeItem = ({startDate, endDate}:any) => {
 
 type CalendarViewProps = {
     calendars: getCalendarListDb[] | null;
-    onClick: (e: any, id: any) => Promise<void>;
+    onClick: (e: MouseEvent<Element>, id: string) => Promise<void>;
     User: any;
     viewYear: string;
     viewMonth: string;
@@ -33,7 +34,7 @@ const CalendarView = ({ calendars, onClick, User, viewYear, viewMonth, viewDate,
     return (
         <div className="todo-list">
             <div className="todo-top-title">{viewYear}년{viewMonth}월{viewDate}일</div>
-            {loading && calendars === null? (<Loading />) :  
+            {loading && calendars === null? (<Loading />) : 
                 (<>
                     {calendars !== null && calendars.map(({_id, title, body, startDate, endDate, label, user}) => {
                         const labelStyle = {'background': label.style};
