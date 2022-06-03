@@ -1,5 +1,7 @@
+import { MouseEvent } from "react";
+
 type AskModalProps = {
-    onClick: (e:any) => void;
+    onClick: (e:MouseEvent<Element>) => void;
     children: any;
 }
 

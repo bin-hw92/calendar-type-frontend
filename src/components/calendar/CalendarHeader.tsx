@@ -3,7 +3,9 @@ import '../../css/Calendar.css';
 import React from "react";
 
 type CalendarHeaderProps = {
-  user: any;
+  user: {
+    [key in string] : string;
+  }|null;
   headerNmae: string;
   tableCalendar: any;
   onClick: (idx:number) => void;

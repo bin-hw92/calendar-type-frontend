@@ -6,7 +6,7 @@ import { changeModal, listCalendar } from "../../modules/calendar";
 import { deleteCalendar, readCalendar, unloadCalendar } from "../../modules/view";
 import { editCalendar } from "../../modules/write";
 
-function timeout(delay:any) { 
+function timeout(delay:number) { 
     return new Promise( res => setTimeout(res, delay) ); 
 }
 

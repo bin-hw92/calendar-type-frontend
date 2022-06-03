@@ -1,10 +1,10 @@
-import { getCalendarListDb, getHolidayListDb } from "../../types";
+import { getCalendarListDB, getHolidayListDB } from "../../types";
 
 type DayCalcProps = {
     viewYear: string;
     viewMonth: string;
-    calendarList: getCalendarListDb[]|null;
-    holidayList: getHolidayListDb[]|null;
+    calendarList: getCalendarListDB[]|null;
+    holidayList: getHolidayListDB[]|null;
 }
 
 export const DayCalc = ({viewYear, viewMonth, calendarList, holidayList}:DayCalcProps) => {

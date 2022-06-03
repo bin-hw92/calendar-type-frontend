@@ -2,7 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import createRequestSaga, { createRequestActionTypes } from "../lib/createRequestSaga";
 import * as calendarAPI from "../lib/api/calendar";
 import { takeLatest } from "redux-saga/effects";
-import { getCalendarListDb } from "../types";
+import { getCalendarListDB } from "../types";
 
 const INITIALIZE = 'write/INITIALIZE'; // 모든 내용 초기화
 
@@ -50,8 +50,8 @@ export function* writeSaga() {
 }
 
 export interface WriteState {
-    setcalendar: getCalendarListDb|null, //수정 화면 시
-    calendar: getCalendarListDb|null,
+    setcalendar: getCalendarListDB|null, //수정 화면 시
+    calendar: getCalendarListDB|null,
     calendarError: any|null,
     calendarId: string|null,
 }

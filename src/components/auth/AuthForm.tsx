@@ -66,7 +66,7 @@ const textMap = {
 };
 
 type AuthFormProps = {
-    type: any;
+    type: string;
     form: any;
     onChange:(e:ChangeEvent<HTMLInputElement>) => void;
     onSubmit:(e:FormEvent) => void;

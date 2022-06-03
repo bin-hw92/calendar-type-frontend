@@ -112,7 +112,7 @@ const WriteView = ({ write, error, onChange, onDateChange, onSubmit, onInputChan
                     <div>
                         <DatePicker 
                             locale={ko} 
-                            onChange={(date:any) => onDateChange(date, "END")} 
+                            onChange={(date:Date) => onDateChange(date, "END")} 
                             value={eDate.toDateString()}
                             selected={eDate}
                             dateFormat="yyyy.MM.dd"

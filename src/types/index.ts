@@ -12,7 +12,7 @@ export interface getTableListDB {
     },
 };
 
-export interface getCalendarListDb {
+export interface getCalendarListDB {
     _id: string,
     title: string,
     body: string,
@@ -49,7 +49,7 @@ export interface getCalendarListDb {
     daysize?: number,
 }
 
-export interface getHolidayListDb {
+export interface getHolidayListDB {
     dateKind: string,
     dateName: string,
     isHoliday: string,

@@ -45,7 +45,9 @@ const UserInfo = styled.div`
 `;
 
 type HeaderProps = {
-    user: any;
+    user: {
+        [key in string] : string;
+    }|null;
     onLogout:() => void;
 }
 

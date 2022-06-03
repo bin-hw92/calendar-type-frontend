@@ -8,7 +8,7 @@ import { changeModal, listCalendar, changeWrite, changeSubWrite } from "../../mo
 import { initialize, updateCalendar, writeCalendar } from "../../modules/write";
 import { labels } from "../utils/labelStyle";
 
-const dateChangeFormat = ({date}:any) => {
+const dateChangeFormat = (date:Date) => {
     const nDate = new Date(date);
     const nYear = nDate.getFullYear();
     const nMonth = ("0" + (1 + nDate.getMonth())).slice(-2);
@@ -92,7 +92,7 @@ const WriteViewContainer = () => {
 
     //DatePicker 변경용 핸들러
     const onDateChange = useCallback((date:Date, type:string) => {
-        const nextDate = dateChangeFormat({date});
+        const nextDate = dateChangeFormat(date);
         if(type === "START"){
             dispatch(changeWrite({key: 'startDay', value: nextDate,}));
             dispatch(changeSubWrite({form: 'startDate', key: 'year', value: nextDate.split('.')[0],}));

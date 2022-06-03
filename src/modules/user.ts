@@ -8,7 +8,13 @@ const TEMP_SET_USER = 'user/TEMP_SET_USER'; // 새로고침 이후 임시 로그
 const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] = createRequestActionTypes('user/CHECK');
 const LOGOUT = 'user/LOGOUT';
 
-export const tempSetUser = createAction(TEMP_SET_USER, (user:string) => user);
+type TempUserState = {
+    user: {
+        [key in string] : string;
+    }|null;
+}
+
+export const tempSetUser = createAction(TEMP_SET_USER, (user:TempUserState) => user);
 export const check = createAction(CHECK); 
 export const logout = createAction(LOGOUT);
 
@@ -40,7 +46,9 @@ export function* userSaga() {
 }
 // initial state
 export interface UserState {
-    user: string|null;
+    user: {
+        [key in string] : string;
+    }|null;
     checkError: boolean|null;
 }
 const initialState:UserState = {

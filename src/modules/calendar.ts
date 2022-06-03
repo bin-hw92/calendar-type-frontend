@@ -3,7 +3,7 @@ import createRequestSaga, { createRequestActionTypes } from "../lib/createReques
 import * as calendarApi from "../lib/api/calendar";
 import { takeLatest } from "redux-saga/effects";
 import produce from "immer";
-import { getCalendarListDb, getHolidayListDb } from "../types";
+import { getCalendarListDB, getHolidayListDB } from "../types";
 
 const CHANGE_CALENDAR = 'calendar/CHANGE_CALENDAR';
 const CHANGE_MODAL = 'calendar/CHANGE_MODAL'; //할 일 추가 팝업
@@ -40,7 +40,7 @@ export const changeModal = createAction(CHANGE_MODAL,
         type,
     }),
 );
-export const changeWrite = createAction(CHANGE_WRITE, ({ key, value}:any) => ({
+export const changeWrite = createAction(CHANGE_WRITE, ({ key, value}:calendarApi.calendarActionState) => ({
     key,
     value
 }));
@@ -99,8 +99,8 @@ export interface CalendarState {
             min: string;
         };
     };
-    calendarList: getCalendarListDb[]|null;
-    holidayList: getHolidayListDb[]|null;
+    calendarList: getCalendarListDB[]|null;
+    holidayList: getHolidayListDB[]|null;
     error: any|null;
     modalFlag: boolean;
     type: string|null;

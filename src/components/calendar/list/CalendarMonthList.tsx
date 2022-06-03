@@ -14,15 +14,15 @@ const CalendarListBlock = styled(Responsive)`
 
 type CalendarItemProps = {
     item: {
-        date: any;
-        fullDate: any;
+        date: string;
+        fullDate: string;
         isMonth: boolean;
         todoList: ItemArray[];
         holiday: boolean;
     };
-    idx: any;
-    viewDate: any;
-    onClick: any;
+    idx: number;
+    viewDate: string;
+    onClick: (fullDate:string) => void;
 }
 type ItemArray = {
     _id: string;

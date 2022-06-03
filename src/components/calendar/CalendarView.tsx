@@ -1,17 +1,34 @@
 import { MouseEvent } from "react";
 import "../../css/Todo.css";
-import { getCalendarListDb } from "../../types";
+import { getCalendarListDB } from "../../types";
 import Loading from "../common/Loading";
 
-const TimeItem = ({startDate, endDate}:any) => {
+type TimeItemProps = {
+    startDate: {
+        year: string;
+        month: string;
+        date: string;
+        hour: string;
+        min: string;
+    };
+    endDate: {
+        year: string;
+        month: string;
+        date: string;
+        hour: string;
+        min: string;
+    }
+}
+
+const TimeItem = ({startDate, endDate}:TimeItemProps) => {
     return (
         <>
         {startDate.year === endDate.year && startDate.month === endDate.month && startDate.date === endDate.date?
             (<div className="time">{startDate.hour}:{startDate.min} ~ {endDate.hour}:{endDate.min}</div>):
             (
             <div className="time">
-                {startDate.yeear}년{startDate.month}월{startDate.date}일 {startDate.hour}:{startDate.min} ~ 
-                {endDate.yeear}년{endDate.month}월{endDate.date}일 {endDate.hour}:{endDate.min}
+                {startDate.year}년{startDate.month}월{startDate.date}일 {startDate.hour}:{startDate.min} ~ 
+                {endDate.year}년{endDate.month}월{endDate.date}일 {endDate.hour}:{endDate.min}
             </div>
             )}
         </>
@@ -20,9 +37,11 @@ const TimeItem = ({startDate, endDate}:any) => {
 }
 
 type CalendarViewProps = {
-    calendars: getCalendarListDb[] | null;
+    calendars: getCalendarListDB[] | null;
     onClick: (e: MouseEvent<Element>, id: string) => Promise<void>;
-    User: any;
+    User: {
+        [key in string] : string;
+    }|null;
     viewYear: string;
     viewMonth: string;
     viewDate: string;

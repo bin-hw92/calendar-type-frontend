@@ -7,7 +7,9 @@ import Loading from "../common/Loading";
 
 type TableListProps = {
   tableList: getTableListDB[]|null;
-  user: any;
+  user: {
+    [key in string] : string;
+  }|null;
   loading: any;
   tableError: any;
   error: string[];

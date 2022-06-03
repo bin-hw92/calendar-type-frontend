@@ -13,12 +13,12 @@ const PaginationBlock = styled.div`
 `;
 const PageNumber = styled.div``;
 
-type buildLinkProps = {
+type BuildLinkProps = {
     username: string;
     page: number;
 }
 
-const buildLink = ({ username, page }:buildLinkProps) => {
+const BuildLink = ({ username, page }:BuildLinkProps) => {
     const query = qs.stringify({ page });
     return username ? `/${username}?${query}` : `/?${query}`;
 };
@@ -35,13 +35,13 @@ const Pagination = ({ page, lastPage }:PaginationProps) => {
             {page === 1 ? (
                 <Button disabled={prevFlag}>이전</Button>
             ):(
-                <Link  to={buildLink({ username: 'table', page: page-1 })} className="btn btn-primary">이전</Link>
+                <Link  to={BuildLink({ username: 'table', page: page-1 })} className="btn btn-primary">이전</Link>
             )}
             <PageNumber>{page}</PageNumber>
             {page === lastPage ? (
                 <Button disabled={nextFlag}>다음</Button>
             ):(
-                <Link  to={buildLink({ username: 'table', page: page+1 })} className="btn btn-primary">다음</Link>
+                <Link  to={BuildLink({ username: 'table', page: page+1 })} className="btn btn-primary">다음</Link>
             )}
             
         </PaginationBlock>

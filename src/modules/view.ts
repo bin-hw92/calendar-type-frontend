@@ -2,7 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import createRequestSaga, { createRequestActionTypes } from "../lib/createRequestSaga";
 import * as calendarAPI from "../lib/api/calendar";
 import { takeLatest } from "redux-saga/effects";
-import { getCalendarListDb } from "../types";
+import { getCalendarListDB } from "../types";
 
 const [READ_CALENDAR, READ_CALENDAR_SUCCESS, READ_CALENDAR_FAILURE] = createRequestActionTypes('view/READ_CALENDAR'); 
 const UNLOAD_CALENDAR = 'view/UNLOAD_CALENDAR'; // 게시판 페이지에서 벗어날 때 데이터 비우기
@@ -22,7 +22,7 @@ export function* calendarReadSaga() {
 }
 
 export interface ViewState {
-    calendar: getCalendarListDb[]|null;
+    calendar: getCalendarListDB[]|null;
     error: any|null;
     deleteFlag: boolean;
 }
