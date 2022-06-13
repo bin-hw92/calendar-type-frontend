@@ -1,67 +1,144 @@
 import styled from 'styled-components';
-import '../../../css/Calendar.css';
 import Loading from '../../common/Loading';
 import Responsive from '../../common/Responsive';
+import CalendarItem from './CalendarItem';
 
-//현재 날짜 넣기
-const nowYear = new Date().getFullYear();
-const nowMonth = new Date().getMonth()+1;
-const nowDay = new Date().getDate();
+/* Style Compent */
+const CalendarListWeekBlock = styled.div`
+    position: relative;
+    min-height: 390px;
+    border: 1px solid #333;
+    border-bottom: 0;
 
+    .list-title {
+        margin: auto;
+        padding: 0;
+        list-style: none;
+        display: flex;
+
+        li {
+            padding: 13px 10px;
+            width: calc(100% / 7);
+            height: 50px;
+            font-weight: bold;
+            border-bottom: 1px solid #333;
+        }
+    }
+    .list-item {
+        margin: auto;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+            position: relative;
+            padding: 35px 1px 5px 1px;
+            width: calc(100% / 7);
+            min-height: 340px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            
+            &:last-child{
+                border-right: 0;
+            }
+        }
+    }
+    
+    .calendar-num {
+        position: absolute;
+        top: 5px;
+        left: 10px;
+    }
+    .Sat {
+        color: royalblue;
+    }
+    .Sun,
+    .Holiday {
+        color: salmon;
+    }
+    .now-date {
+        color: #fff;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            width: 26px;
+            height: 26px;
+            background-color: turquoise;
+            border-radius: 50%;
+            color: #fff;
+            z-index: -1;
+        }
+    }
+    .non-month{
+        &:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1px;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(241, 241, 241, 0.6);
+            z-index: -1;
+        }
+    }
+    .on-calendar{
+        &:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: calc(100% + 3px);
+            height: calc(100% + 2px);
+            border-top: 2px solid turquoise;
+            border-left: 2px solid turquoise;
+            border-right: 2px solid turquoise;
+            border-bottom: 2px solid turquoise;
+            z-index: 2;
+        }
+    }
+    .calendar-todo-absolute {
+        position: absolute;
+        width: 100%;
+    }
+    .calendar-todo-item {
+        position: relative;
+        width: 100%;
+        height: 22px;
+        font-size: 0.75rem;
+        margin-top: 3px;
+        padding: 2px 5px;
+        color: #343a40;
+        word-break: keep-all;
+        white-space: nowrap;
+    }
+    .calendar-todo-item-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    .start-border-item {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+    .end-border-item {
+        margin-right: 1px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+`;
 const CalendarListBlock = styled(Responsive)`
     margin-top: 4rem;
 `;
 
-type CalendarItemProps = {
-    item: {
-        date: string;
-        fullDate: string;
-        isMonth: boolean;
-        todoList: ItemArray[];
-        holiday?: boolean;
-        weekCnt: number;
-    };
-    idx: number;
-    viewDate: string;
-    onClick: (fullDate:string) => void;
-}
-type ItemArray = {
-    _id: string;
-    title: string;
-    label: {
-        style: string;
-    }
-    startflag: boolean;
-    endflag: boolean;
-    daysize: number;
-}
 
-const CalendarItem = ({ item, idx, viewDate, onClick }:CalendarItemProps) => {
-    const {date, fullDate, isMonth, todoList, holiday} = item;
-    const thisDate = fullDate.split('.');
 
-    //클래스명 정하기
-    const classWeek = idx % 7 === 0? 'Sun calendar-num' : (idx+1) % 7 === 0? 'Sat calendar-num' : holiday? 'Holiday calendar-num' : 'calendar-num';
-    const classMonth = !isMonth? 'non-month' : parseInt(date) === parseInt(viewDate)? 'on-calendar' : '' //선택된 날자 찾기
-    const classNow =  nowYear === parseInt(thisDate[0]) && nowMonth === parseInt(thisDate[1]) && parseInt(date) === nowDay? 'now-date' : '';
-    return (
-        <li className={classMonth} date-full={fullDate} onClick={() => onClick(fullDate)}>
-            <div className={`${classNow} ${classWeek}`}>{date}</div>
-            <div className='calendar-todo-absolute'>
-                {todoList.map(({_id, title, label, startflag, endflag, daysize}, idx) => {
-                    const labelStyle = {background : `${label.style}`};
-                    const itemStyle =  daysize === 0 ? {overflow: 'hidden'} : {};
-                    const labelClass = 'calendar-todo-item-background'.concat(startflag?' start-border-item':'').concat(endflag?' end-border-item':'');
-                    return (idx < 5 && <div className='calendar-todo-item' key={_id} style={itemStyle}>
-                        <div className={labelClass} style={labelStyle}></div>
-                            {startflag && title}
-                            </div>)
-                })}
-            </div>
-        </li>
-    );
-};
-
+/* Type Props */
 type CalendarMonthListProps = {
     loading: any;
     dates: Array<any>;
@@ -78,7 +155,7 @@ const CalendarWeekList = ({loading, dates, viewDate, error, onClick}: CalendarMo
     }
     
     return (
-        <div className="calendar-list-week">
+        <CalendarListWeekBlock>
             <ul className="list-title">
                 <li className="Sun">일</li>
                 <li>월</li>
@@ -94,7 +171,7 @@ const CalendarWeekList = ({loading, dates, viewDate, error, onClick}: CalendarMo
                 ))}
             </ul>
             {loading && <Loading />}
-        </div>
+        </CalendarListWeekBlock>
     )
 }
 
