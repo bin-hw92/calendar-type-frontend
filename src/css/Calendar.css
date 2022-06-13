@@ -78,33 +78,34 @@
 .calendar-button-header > .on-button {
     background-color: #ffc107;
 }
-.calendar-list {
+/* 월별 모드 */
+.calendar-list-month {
     position: relative;
     min-height: 875px;
     border: 1px solid #333;
     border-bottom: 0;
 }
-.calendar-list > .list-title {
+.calendar-list-month > .list-title {
     margin: auto;
     padding: 0;
     list-style: none;
     display: flex;
 }
-.calendar-list > .list-title > li {
+.calendar-list-month > .list-title > li {
     padding: 13px 10px;
     width: calc(100% / 7);
     height: 50px;
     font-weight: bold;
     border-bottom: 1px solid #333;
 }
-.calendar-list > .list-item {
+.calendar-list-month > .list-item {
     margin: auto;
     padding: 0;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
 }
-.calendar-list > .list-item > li {
+.calendar-list-month > .list-item > li {
     position: relative;
     padding: 35px 1px 5px 1px;
     width: calc(100% / 7);
@@ -112,9 +113,48 @@
     border-bottom: 1px solid #333;
     cursor: pointer;
 }
-.calendar-list > .list-item > li:nth-child(7n){
+.calendar-list-month > .list-item > li:nth-child(7n){
     border-right: 0;
 }
+/* 주별 모드 */
+.calendar-list-week {
+    position: relative;
+    min-height: 390px;
+    border: 1px solid #333;
+    border-bottom: 0;
+}
+.calendar-list-week > .list-title {
+    margin: auto;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+.calendar-list-week > .list-title > li {
+    padding: 13px 10px;
+    width: calc(100% / 7);
+    height: 50px;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+}
+.calendar-list-week > .list-item {
+    margin: auto;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+.calendar-list-week > .list-item > li {
+    position: relative;
+    padding: 35px 1px 5px 1px;
+    width: calc(100% / 7);
+    min-height: 340px;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+}
+.calendar-list-week > .list-item > li:nth-child(7n){
+    border-right: 0;
+}
+/* 끝 */
 .calendar-num {
     position: absolute;
     top: 5px;

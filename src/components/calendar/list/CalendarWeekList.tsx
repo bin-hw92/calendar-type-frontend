@@ -18,7 +18,8 @@ type CalendarItemProps = {
         fullDate: string;
         isMonth: boolean;
         todoList: ItemArray[];
-        holiday: boolean;
+        holiday?: boolean;
+        weekCnt: number;
     };
     idx: number;
     viewDate: string;
@@ -43,7 +44,6 @@ const CalendarItem = ({ item, idx, viewDate, onClick }:CalendarItemProps) => {
     const classWeek = idx % 7 === 0? 'Sun calendar-num' : (idx+1) % 7 === 0? 'Sat calendar-num' : holiday? 'Holiday calendar-num' : 'calendar-num';
     const classMonth = !isMonth? 'non-month' : parseInt(date) === parseInt(viewDate)? 'on-calendar' : '' //선택된 날자 찾기
     const classNow =  nowYear === parseInt(thisDate[0]) && nowMonth === parseInt(thisDate[1]) && parseInt(date) === nowDay? 'now-date' : '';
-
     return (
         <li className={classMonth} date-full={fullDate} onClick={() => onClick(fullDate)}>
             <div className={`${classNow} ${classWeek}`}>{date}</div>
@@ -70,7 +70,7 @@ type CalendarMonthListProps = {
     onClick: (fullDate: string) => void;
 }
 
-const CalendarMonthList = ({loading, dates, viewDate, error, onClick}: CalendarMonthListProps) => {
+const CalendarWeekList = ({loading, dates, viewDate, error, onClick}: CalendarMonthListProps) => {
     if(error){
         if(error.response && error.response.status === 404){
             return <CalendarListBlock>파일이 존재하지 않습니다.</CalendarListBlock>
@@ -78,7 +78,7 @@ const CalendarMonthList = ({loading, dates, viewDate, error, onClick}: CalendarM
     }
     
     return (
-        <div className="calendar-list-month">
+        <div className="calendar-list-week">
             <ul className="list-title">
                 <li className="Sun">일</li>
                 <li>월</li>
@@ -90,7 +90,7 @@ const CalendarMonthList = ({loading, dates, viewDate, error, onClick}: CalendarM
             </ul>
             <ul className="list-item">
                 {dates.map((date, idx) => (
-                    <CalendarItem key={date.fullDate} item={date} idx={idx} viewDate={viewDate} onClick={onClick} />
+                    <CalendarItem key={date.fullDate} item={date} idx={idx} viewDate={viewDate} onClick={onClick}/>
                 ))}
             </ul>
             {loading && <Loading />}
@@ -98,4 +98,4 @@ const CalendarMonthList = ({loading, dates, viewDate, error, onClick}: CalendarM
     )
 }
 
-export default CalendarMonthList;
+export default CalendarWeekList;

@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import TableListPage from "./pages/TableListPage";
 import TableWritePage from "./pages/TableWritePage";
+import TestPage from "./pages/testPage";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="write" element={<TableWritePage />}/>
         </Route>
         <Route path="/calendar" element={<CalrendarPage />}/>
+        <Route path="/test" element={<TestPage />} />
        </Routes>
     </>
   );

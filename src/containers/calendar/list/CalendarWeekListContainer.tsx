@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CalendarMonthList from "../../../components/calendar/list/CalendarMonthList";
+import CalendarWeekList from "../../../components/calendar/list/CalendarWeekList";
 import { RootState } from "../../../modules";
-import { changeCalendar, changeModal, changeWrite, changeSubWrite, listCalendar, listHoliday, changeCalendarMonth } from "../../../modules/calendar";
-import { DayCalc, DayStartEnd } from "../../utils/MonthCalc";
+import { changeCalendar, changeCalendarMonth, changeModal, changeSubWrite, changeWrite, listCalendar, listHoliday } from "../../../modules/calendar";
+import { WeekDay, WeekStartEnd } from "../../utils/WeekCalc";
 
-const CalendarMonthListContainer = () => {
-    const [dates, setDates] = useState([]);
+const CalendarWeekListContainer = () => {
+    const [dates, setDates] = useState<any>([]);
     const dispatch = useDispatch();
     const {form, calendarList, error, loading, holidayList } = useSelector(({ calendar, loading }:RootState) => ({
         form: calendar.form,
@@ -16,15 +16,9 @@ const CalendarMonthListContainer = () => {
         holidayList: calendar.holidayList,
     }));
     const {viewYear, viewMonth, viewDate} = form;
-    
-    /* useEffect(() => {
-        return () => { // 언마운트될 때 초기화
-            dispatch(initialize());
-        };
-    },[dispatch]); */
-
+ 
     useEffect(() => {
-        const thisDates = DayStartEnd({viewYear, viewMonth}); //calendarList가 있을 경우
+        const thisDates = WeekStartEnd({viewYear, viewMonth}); //calendarList가 있을 경우
         dispatch(listCalendar(thisDates)); //처음 입장 시 
         dispatch(changeCalendarMonth(thisDates));
     },[viewYear, viewMonth, dispatch]);
@@ -32,12 +26,11 @@ const CalendarMonthListContainer = () => {
     useEffect(() => {
         dispatch(listHoliday({viewYear})); //처음 입장 시
     },[viewYear, dispatch]);
-
-
+ 
     useEffect(() => {
-        const thisDates = DayCalc({viewYear, viewMonth, calendarList, holidayList}); //calendarList가 있을 경우
+        const thisDates = WeekDay({viewYear, viewMonth, viewDate, calendarList, holidayList}); //calendarList가 있을 경우
         setDates(thisDates);
-    },[calendarList, holidayList, viewMonth, viewYear]);
+    },[calendarList, holidayList, viewMonth, viewYear, viewDate]);
 
     const onClick = useCallback((fullDate:string) => {
         const DateArray = fullDate.split('.');
@@ -62,15 +55,14 @@ const CalendarMonthListContainer = () => {
     },[calendarList, dispatch]);
 
     if(calendarList === null && holidayList === null) return <></>;
-    return (
-        <CalendarMonthList
-            loading={loading}
-            dates={dates} 
-            viewDate={viewDate}
-            error={error}
-            onClick={onClick}
-        />
-    )
+
+    return <CalendarWeekList 
+                loading={loading}
+                dates={dates}
+                viewDate={viewDate}
+                error={error}
+                onClick={onClick}
+            />
 };
 
-export default CalendarMonthListContainer;
+export default CalendarWeekListContainer;

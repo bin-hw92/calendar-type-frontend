@@ -6,16 +6,18 @@ type CalendarHeaderProps = {
   user: {
     [key in string] : string;
   }|null;
-  headerNmae: string;
+  headerName: string;
   tableCalendar: any;
+  viewForm:number;
   onClick: (idx:number) => void;
   onModalClick: () => void;
   onBackClick: () => void;
   onFormChange: (value:number) => void;
 }
 
-const CalendarHeader = ({user, headerNmae, tableCalendar, onClick, onModalClick, onBackClick, onFormChange}:CalendarHeaderProps) => {
-
+const CalendarHeader = ({user, headerName, tableCalendar, viewForm, onClick, onModalClick, onBackClick, onFormChange}:CalendarHeaderProps) => {
+  const monthClass = viewForm === 0? 'month-button on-button' : 'month-button';
+  const weekClass  = viewForm === 1? 'week-button on-button' : 'week-button';
   return (
     <>
     <div className="calendar-top-header">
@@ -26,7 +28,7 @@ const CalendarHeader = ({user, headerNmae, tableCalendar, onClick, onModalClick,
     </div>
     <div className="calendar-header">
       <button className="left-arrow" onClick={() => onClick(-1)} />
-        <div>{headerNmae}</div>
+        <div>{headerName}</div>
       <button className="right-arrow" onClick={() => onClick(1)} />
       <button className="today-button" onClick={() => onClick(0)}>오늘</button>
       {user &&(
@@ -35,8 +37,8 @@ const CalendarHeader = ({user, headerNmae, tableCalendar, onClick, onModalClick,
       </div>)}
     </div>
     <div className="calendar-button-header">
-      <button className="week-button" onClick={() => onFormChange(1)}>주</button>
-      <button className="month-button on-button" onClick={() => onFormChange(0)}>월</button>
+      <button className={weekClass} onClick={() => onFormChange(1)}>주</button>
+      <button className={monthClass} onClick={() => onFormChange(0)}>월</button>
     </div>
     </>
   );
