@@ -3,6 +3,7 @@ import qs from 'qs';
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+/* styled component */
 const PaginationBlock = styled.div`
     width: 320px;
     margin: 0 auto;
@@ -13,6 +14,7 @@ const PaginationBlock = styled.div`
 `;
 const PageNumber = styled.div``;
 
+/* Type Props */
 type BuildLinkProps = {
     username: string;
     page: number;

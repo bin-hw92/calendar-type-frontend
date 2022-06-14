@@ -1,8 +1,123 @@
 import { MouseEvent } from "react";
-import "../../css/Todo.css";
 import { getCalendarListDB } from "../../types";
+import styled from "styled-components";
 import Loading from "../common/Loading";
 
+/* styled component */
+const TodoListWrap = styled.div`
+    position: relative;
+    margin: 30px auto;
+    padding: 0 2rem;
+    min-height: 180px;
+
+    .todo-top-title {
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        font-size: 1.25rem;
+        font-weight: bold;
+        border-bottom: 1px solid #555;
+    }
+`
+/* Ul 태그 부분 */
+const TodoListItem = styled.div` 
+    display: flex;
+    list-style: none;
+    margin: auto;
+    padding: 0 0 25px 0;
+    align-items: flex-start;
+
+    li {
+        margin-right: 10px;
+    }
+
+    .label {
+        position: relative;
+        padding-left: 5px;
+        width: 10%;
+        max-width: 100px;
+        font-size: 0.85rem;
+        line-height: 1.2;
+        word-break: break-all;
+
+        div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+        }
+    }
+
+    .title {
+        position: relative;
+        width: 45%;
+        max-width: 515px;
+        cursor: pointer;
+
+        .title-font {
+            font-size: 1.125rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .time {
+            position: absolute;
+            left: 0;
+            bottom: -17px;
+            font-size: 0.75rem;
+            color: #777;
+        }
+    }
+    .title-none {
+        position: relative;
+        width: 45%;
+        max-width: 515px;
+
+        .title-none-font {
+            font-size: 1.125rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .time {
+            position: absolute;
+            left: 0;
+            bottom: -17px;
+            font-size: 0.75rem;
+            color: #777;
+        }
+    }
+
+    .body {
+        width: 45%;
+        max-width: 515px;
+        color: #555;
+    }
+
+    .delete-none{
+        position: relative;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+    .delete {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            background: url('./delete-icon.svg');
+            background-size: 100% 100%;
+        }
+    }
+`
+
+/* Type Props */
 type TimeItemProps = {
     startDate: {
         year: string;
@@ -18,6 +133,18 @@ type TimeItemProps = {
         hour: string;
         min: string;
     }
+}
+
+type CalendarViewProps = {
+    calendars: getCalendarListDB[] | null;
+    onClick: (e: MouseEvent<Element>, id: string) => Promise<void>;
+    User: {
+        [key in string] : string;
+    }|null;
+    viewYear: string;
+    viewMonth: string;
+    viewDate: string;
+    loading: any;
 }
 
 const TimeItem = ({startDate, endDate}:TimeItemProps) => {
@@ -36,28 +163,17 @@ const TimeItem = ({startDate, endDate}:TimeItemProps) => {
     )
 }
 
-type CalendarViewProps = {
-    calendars: getCalendarListDB[] | null;
-    onClick: (e: MouseEvent<Element>, id: string) => Promise<void>;
-    User: {
-        [key in string] : string;
-    }|null;
-    viewYear: string;
-    viewMonth: string;
-    viewDate: string;
-    loading: any;
-}
 
 const CalendarView = ({ calendars, onClick, User, viewYear, viewMonth, viewDate, loading }:CalendarViewProps) => {
 
     return (
-        <div className="todo-list">
+        <TodoListWrap>
             <div className="todo-top-title">{viewYear}년{viewMonth}월{viewDate}일</div>
             {loading && calendars === null? (<Loading />) : 
                 (<>
                     {calendars !== null && calendars.map(({_id, title, body, startDate, endDate, label, user}) => {
                         const labelStyle = {'background': label.style};
-                        return <ul className="todo-list-item" key={_id} onClick={(e) => onClick(e, _id)}>
+                        return <TodoListItem key={_id} onClick={(e) => onClick(e, _id)}>
                                 <li className="label">
                                     <span>{label.text}</span>
                                     <div style={labelStyle}></div>
@@ -84,13 +200,13 @@ const CalendarView = ({ calendars, onClick, User, viewYear, viewMonth, viewDate,
                                 ) : 
                                 (<li className="delete-none"></li>)
                                 }
-                            </ul>  
+                            </TodoListItem>  
                         })}
                     </>
                 )
             }
             
-        </div>
+        </TodoListWrap>
     );
 };
 

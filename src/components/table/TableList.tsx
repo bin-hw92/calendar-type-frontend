@@ -2,9 +2,89 @@
 import { KeyboardEvent } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import { getTableListDB } from "../../types";
 import Loading from "../common/Loading";
 
+/* styled component */
+const TableHeader = styled.div`
+  text-align: right;
+  margin: 30px auto;
+`;
+const TableListWrap = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  ul {
+    margin: auto;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+    
+    .table-list-item { /* li 부분 */
+      margin-bottom: 35px;
+      border-bottom: 1px solid #333;
+      
+      .item-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .item-top-title {
+          display: flex;
+          width: calc(100% - 150px);
+          font-size: 1.25rem;
+          font-weight: bold;
+          align-items: center;
+          
+          .item-delete-button {
+            margin-left: 10px;
+            width: 20px;
+            height: 20px;
+            background: url('./delete-icon.svg');
+            background-size: 100% 100%;
+            cursor: pointer;
+          }
+        }
+
+        .item-top-password {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          input {
+            width: calc(100% - 70px);
+          }
+        }
+      }
+
+      .item-body {
+        padding: 20px 0 30px 0;
+        white-space: pre-wrap;
+      }
+
+      
+      .item-top-error {
+        padding: 10px 0;
+        color: red;
+        text-align: right;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .table-list-item {
+        margin-bottom: 25px;
+    }
+    .item-top-password > input {
+        width: calc(100% - 50px);
+    }
+  }
+`
+
+/* Type Props */
 type TableListProps = {
   tableList: getTableListDB[]|null;
   user: {
@@ -25,13 +105,13 @@ const TableList = ({tableList, user, loading, tableError, error, onClick, onKeyU
     
     return (
       <>
-        <div className="table-header">
+        <TableHeader>
             <Link to="write">
               <Button variant="primary">추가</Button>
             </Link>
-        </div>
+        </TableHeader>
         {!loading && tableList && (
-          <div className="table-list">
+          <TableListWrap>
           <ul>
             {tableList.map(table => {
               const passwordError = error[0] === table._id ?  {'border': '1px solid red'} : {};
@@ -54,7 +134,7 @@ const TableList = ({tableList, user, loading, tableError, error, onClick, onKeyU
                 </li>
             )})}
           </ul>
-        </div>
+        </TableListWrap>
         )}
         {loading && <Loading />}
       </>
