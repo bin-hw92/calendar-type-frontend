@@ -9,7 +9,6 @@ type MonthChangeProps = {
 }
 
 const MonthChange = ({idx, viewYear, viewMonth}:MonthChangeProps) => {
-    console.log('@@2');
     const thisDate = new Date(parseInt(viewYear), parseInt(viewMonth), 0);
     let changeYear = viewYear;
     let changeMonth = viewMonth;

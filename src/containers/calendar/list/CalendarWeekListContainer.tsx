@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CalendarWeekList from "../../../components/calendar/list/CalendarWeekList";
 import { RootState } from "../../../modules";
-import { changeCalendar, changeCalendarMonth, changeModal, changeSubWrite, changeWrite, listCalendar, listHoliday } from "../../../modules/calendar";
+import { changeCalendarMonth, listCalendar, listHoliday } from "../../../modules/calendar";
+import { useCalendarClick } from "../../utils/useCalendarClick";
 import { WeekDay, WeekStartEnd } from "../../utils/WeekCalc";
 
 const CalendarWeekListContainer = () => {
@@ -32,27 +33,7 @@ const CalendarWeekListContainer = () => {
         setDates(thisDates);
     },[calendarList, holidayList, viewMonth, viewYear, viewDate]);
 
-    const onClick = useCallback((fullDate:string) => {
-        const DateArray = fullDate.split('.');
-        dispatch(changeCalendar({
-            viewYear: DateArray[0],
-            viewMonth: DateArray[1],
-            viewDate: DateArray[2],
-        }));
-        //팝업 띄우기 전에 write에 달력 값 넣기
-        dispatch(changeWrite({key: 'startDay', value: fullDate}));
-        dispatch(changeWrite({key: 'endDay', value: fullDate}));
-        dispatch(changeSubWrite({form: 'startDate', key: 'year', value: DateArray[0]}));
-        dispatch(changeSubWrite({form: 'startDate', key: 'month', value: DateArray[1]}));
-        dispatch(changeSubWrite({form: 'startDate', key: 'date', value: DateArray[2]}));
-        dispatch(changeSubWrite({form: 'endDate', key: 'year', value: DateArray[0]}));
-        dispatch(changeSubWrite({form: 'endDate', key: 'month', value: DateArray[1]}));
-        dispatch(changeSubWrite({form: 'endDate', key: 'date', value: DateArray[2]}));
-        
-        //값이 있을 경우 해당 날짜 상세 보여주기!!
-        const TodoLen = calendarList !== null && calendarList.filter(({startDay, endDay}) => startDay <= fullDate && endDay >= fullDate).length;
-        if(TodoLen > 0) dispatch(changeModal({modalFlag:true, type:'view'}));
-    },[calendarList, dispatch]);
+    const onClick = useCalendarClick({calendarList});
 
     if(calendarList === null && holidayList === null) return <></>;
 
