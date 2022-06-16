@@ -4,10 +4,7 @@ import CalendarYearList from "../../../components/calendar/list/CalendarYearList
 import { RootState } from "../../../modules";
 import { changeCalendar, changeCalendarMonth, changeSubWrite, changeWrite, listCalendar } from "../../../modules/calendar";
 import { deleteCalendar } from "../../../modules/view";
-
-function timeout(delay:number) { 
-    return new Promise( res => setTimeout(res, delay) ); 
-}
+import { timeout } from "../../utils/useTimeout";
 
 const CalendarYearListContainer = () => {
     const dispatch = useDispatch();
