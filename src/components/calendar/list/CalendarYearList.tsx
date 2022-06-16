@@ -3,12 +3,20 @@ import styled from 'styled-components';
 import { getCalendarListDB } from '../../../types';
 import Loading from '../../common/Loading';
 import Responsive from '../../common/Responsive';
+import CalendarChart from '../CalendarChart';
 
 /* Style Compent */
 const CalendarListWeekBlock = styled.div`
     position: relative;
     border: 1px solid #333;
     border-bottom: 0;
+
+    .chart-title {
+        margin-bottom: 25px;
+        font-size: 1.25rem;
+        font-weight: bold;
+        text-align: center;
+    }
 
     .list-title {
         margin: auto;
@@ -213,6 +221,10 @@ const CalendarYearList = ({loading, calendarList, error, User, onClick}: Calenda
     
     return (
         <CalendarListWeekBlock>
+            <div>
+                <div className='chart-title'>월별 할 일</div>
+                <CalendarChart calendarList={calendarList} />
+            </div>
             <ul className="list-title">
                 <li className='label'>라벨</li>
                 <li className='date'>기간</li>

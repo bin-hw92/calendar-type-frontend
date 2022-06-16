@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback, useEffect, useState } from "react";
+import { MouseEvent, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CalendarYearList from "../../../components/calendar/list/CalendarYearList";
 import { RootState } from "../../../modules";
