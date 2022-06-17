@@ -33,19 +33,15 @@ const CalendarListWeekBlock = styled.div`
         }
         .label {
             width: calc(15% - 10px);
-            min-width: 150px;
         }
         .date {
             width: calc(25% - 10px);
-            min-width: 170px;
         }
         .title {
             width: calc(30% - 10px);
-            min-width: 220px;
         }
         .body {
             width: calc(30% - 10px);
-            min-width: 220px;
         }
         .delete {
             width: 60px;
@@ -74,7 +70,6 @@ const CalendarListWeekBlock = styled.div`
                 .label {
                     position: relative;
                     width: calc(15% - 10px);
-                    min-width: 150px;
                     font-size: 0.85rem;
                     line-height: 1.2;
                     word-break: break-all;
@@ -89,17 +84,18 @@ const CalendarListWeekBlock = styled.div`
                 }
                 .date {
                     width: calc(25% - 10px);
-                    min-width: 170px;
                 }
                 .title {
                     width: calc(30% - 10px);
-                    min-width: 220px;
                     font-size: 1rem;
                     font-weight: bold;
+
+                    .date-font {
+                        display: none;
+                    }
                 }
                 .body {
                     width: calc(30% - 10px);
-                    min-width: 220px;
                 }
                 li {
                     padding-left: 5px;
@@ -131,6 +127,62 @@ const CalendarListWeekBlock = styled.div`
                 border-right: 0;
             }
         }
+    }
+    
+    @media screen and (max-width: 480px) {
+        .list-title {
+            .label {
+                width: calc(26% - 10px);
+            }
+            .date {
+                display: none;
+            }
+            .title {
+                width: calc(37% - 10px);
+            }
+            .body {
+                width: calc(37% - 10px);
+            }
+            .delete {
+                width: 30px;
+            }
+        }
+        .list-item {
+            li {
+                .todo-item {
+                    .label {
+                        width: calc(26% - 10px);
+                    }
+                    .date {
+                        display: none;
+                    }
+                    .title {
+                        width: calc(37% - 10px);
+
+                        .date-font {
+                            display: block;
+                            font-weight: normal;
+                            font-size: 0.9rem;
+                        }
+                    }
+                    .body {
+                        width: calc(37% - 10px);
+                    }
+                    .delete {
+                        width: 30px;
+                
+                        &:before {
+                            top: calc(50% - 10px);
+                            left: calc(50% - 10px);
+                            width: 20px;
+                            height: 20px;
+                        }
+                    }
+                    .delete-none {
+                        width: 30px;
+                    }
+                }
+            }
     }
 `;
 const CalendarListBlock = styled(Responsive)`
@@ -199,9 +251,10 @@ const CalendarTodoList = ({date, User, onClick}:CalendarTodoListProps) => {
                     <span>{date.label.text}</span>
                     <div style={labelStyle}></div>
                 </li>
-                <li className='date'><TimeItem startDate={date.startDate} endDate={date.endDate} key={date._id} /></li>
+                <li className='date'><TimeItem startDate={date.startDate} endDate={date.endDate} /></li>
                 <li className="title">
                     <div className="title-font">{date.title}</div>
+                    <div className='date-font'><TimeItem startDate={date.startDate} endDate={date.endDate} /></div>
                 </li>
                 <li className="body">{date.body}</li>
                 {User?.username === date.user.username? 

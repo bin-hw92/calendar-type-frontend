@@ -75,6 +75,14 @@ const CalendarHeaderWrap = styled.div`
       border: 1px solid #333;
       border-radius: 3px;
   }
+  
+  @media screen and (max-width: 480px) {
+    margin: 3rem auto 1.5rem auto;
+
+    .todo-add-wrap {
+      top: -2.5rem;
+    }
+  }
 `;
 
 const CalendarButtonHader = styled.div`
