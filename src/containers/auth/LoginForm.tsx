@@ -36,6 +36,14 @@ const LoginForm = () => {
         const { username, password} = form;
         dispatch(login({username, password}));
     };
+        
+    const onGoogleSignInSuccess = async (res:any) => {
+
+    };
+
+    const googleError = (error:Error) => {
+        console.log(error);
+      };
 
     useEffect(() => {
         dispatch(initializeForm('login'));
@@ -74,6 +82,8 @@ const LoginForm = () => {
             onChange={onChange}
             onSubmit={onSubmit}
             error={error}
+            onGoogleSignInSuccess={onGoogleSignInSuccess}
+            googleError={googleError}
         />
     );
 };

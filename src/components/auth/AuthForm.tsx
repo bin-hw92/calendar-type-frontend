@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import palette from "../../lib/styles/palette";
 import Button from "../common/Button";
+import GoogleLogin from 'react-google-login';
 import { ChangeEvent, FormEvent } from "react";
 
 /* 
@@ -71,10 +72,14 @@ type AuthFormProps = {
     onChange:(e:ChangeEvent<HTMLInputElement>) => void;
     onSubmit:(e:FormEvent) => void;
     error: any;
+    onGoogleSignInSuccess?: (res:any) => void,
+    googleError?: (error:Error) => void,
 }
 
-const AuthForm = ({type, form, onChange, onSubmit, error}:AuthFormProps) => {
+const AuthForm = ({type, form, onChange, onSubmit, error, onGoogleSignInSuccess, googleError}:AuthFormProps) => {
+    const clientId = "";
     const text = type === 'register'? textMap.register : textMap.login;
+
     return (
         <AuthFormBlock>
             <h3>{text}</h3>
@@ -88,6 +93,17 @@ const AuthForm = ({type, form, onChange, onSubmit, error}:AuthFormProps) => {
                 <ButtonMarginTop cyan fullWidth >
                     {text}
                 </ButtonMarginTop>
+                {type === 'login' ? 
+                (
+                <div style={{marginTop: '20px'}}>
+                    <GoogleLogin
+                        clientId={clientId}
+                        onSuccess={(res) => onGoogleSignInSuccess? onGoogleSignInSuccess(res) : ''}
+                        onFailure={(error) => googleError? googleError(error) : ''}
+                        cookiePolicy={'single_host_origin'}
+                    />
+                </div>
+                ) : ('')}
             </form>
             <Footer>
                 {type === 'login' ? (
