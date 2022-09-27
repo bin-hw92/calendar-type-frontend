@@ -14,6 +14,7 @@ type TempUserState = {
     }|null;
 }
 
+/* 액션 */
 export const tempSetUser = createAction(TEMP_SET_USER, (user:TempUserState) => user);
 export const check = createAction(CHECK); 
 export const logout = createAction(LOGOUT);
@@ -56,6 +57,7 @@ const initialState:UserState = {
     checkError: null,
 };
 
+/* 리듀서를 handleActions로 대체 가능 */
 export default handleActions<UserState, any>(
     {
         [TEMP_SET_USER] : (state, { payload: user }) => ({

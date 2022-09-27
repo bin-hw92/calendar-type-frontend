@@ -47,7 +47,6 @@ export const writeTable = createAction(WRITE_TABLE, ({ title, password, body, us
     users,
 }));
 
-
 export const listTable = createAction(LIST_TABLE, (page:number) => (page));
 
 export const deleteTable = createAction(DELETE_TABLE, (id:string) => (id));

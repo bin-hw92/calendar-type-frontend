@@ -14,7 +14,7 @@ export const unloadCalendar = createAction(UNLOAD_CALENDAR);
 export const deleteCalendar = createAction(DELETE_CALENDAR, (id:string) => (id));
 
 const readCalendarSaga = createRequestSaga(READ_CALENDAR, calendarAPI.readCalendar);
-const deleteCalendarSaga = createRequestSaga(READ_CALENDAR, calendarAPI.deleteCalendar);
+const deleteCalendarSaga = createRequestSaga(DELETE_CALENDAR, calendarAPI.deleteCalendar);
 
 export function* calendarReadSaga() {
     yield takeLatest(READ_CALENDAR, readCalendarSaga);
