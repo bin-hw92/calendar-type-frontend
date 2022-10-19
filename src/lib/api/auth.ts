@@ -4,6 +4,10 @@ import client from "./client";
 export const login = ({username, password}:AuthApistate) => {
     return client.post('/api/auth/login', { username, password });
 }
+//로그인 Google
+export const loginGoogle = ({username, email}:AuthApistate) => {
+    return client.post('/api/auth/loginGoogle', { username, email });
+}
 
 //회원가입
 export const register = ({username, password}:AuthApistate) => {

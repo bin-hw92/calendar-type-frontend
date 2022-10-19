@@ -77,7 +77,7 @@ type AuthFormProps = {
 }
 
 const AuthForm = ({type, form, onChange, onSubmit, error, onGoogleSignInSuccess, googleError}:AuthFormProps) => {
-    const clientId = "";
+    const clientId = "275610597847-procqllf16u5n6up887qqr1713cl69d5.apps.googleusercontent.com";
     const text = type === 'register'? textMap.register : textMap.login;
 
     return (

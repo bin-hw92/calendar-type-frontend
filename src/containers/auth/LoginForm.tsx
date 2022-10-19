@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import AuthForm from "../../components/auth/AuthForm";
-import { changeField, initializeForm, login } from "../../modules/auth";
+import { changeField, initializeForm, login, loginGoogle } from "../../modules/auth";
 import { useNavigate } from "react-router-dom";
 import { check } from "../../modules/user";
 import { RootState } from "../../modules";
@@ -38,7 +38,7 @@ const LoginForm = () => {
     };
         
     const onGoogleSignInSuccess = async (res:any) => {
-
+        dispatch(loginGoogle({username: res.response.data.name, email: res.response.data.name}));
     };
 
     const googleError = (error:Error) => {
