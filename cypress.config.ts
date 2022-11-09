@@ -17,6 +17,6 @@ export default defineConfig({
   },
   viewportWidth: 1320,
   viewportHeight: 820,
-  projectId: "bt9t7m",
+  projectId: "jxjsws"
   // The rest of the Cypress config options go here...
 });
