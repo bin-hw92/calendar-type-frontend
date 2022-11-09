@@ -2,8 +2,7 @@
 
 name: deploy
 
-on:
-  push: [push]
+on: [push]
 
 jobs:
   deploy:
