@@ -6,9 +6,9 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          repository: 'input-output-hk/cardano-node'
+      - name: Checkout
+        uses: actions/checkout@v2
+        
       - name: delete all
         run: | 
           rm -rf ** && find . -name . -o -prune -exec rm -rf -- {} +
