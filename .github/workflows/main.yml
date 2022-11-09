@@ -27,5 +27,3 @@ jobs:
         run: npm run build
         env:
           CI: ""
-      - name: Test Case
-        run: yarn e2e
