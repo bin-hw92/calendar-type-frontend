@@ -1,28 +1,19 @@
-name: Cypress Tests
+name: Cypress Tests using Cypress Docker Image
 
 on: [push]
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    container: cypress/browsers:node12.18.3-chrome87-ff82
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
-
-      - name: Install dependencies
-        run: yarn install
-
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
-          build: yarn run build
-          start: yarn start
+          # Specify Browser since container image is compile with Firefox
+          browser: firefox
