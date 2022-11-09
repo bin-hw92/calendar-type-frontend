@@ -1,18 +1,17 @@
-# This is a basic workflow to help you get started with Actions
-
-name: deploy
+name: Cypress Tests
 
 on: [push]
 
 jobs:
-  deploy:
+  cypress-run:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source code
+      - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Cache node modules
-        uses: actions/cache@v1
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v4.x.x # use the explicit version number
         with:
           path: node_modules
           key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
