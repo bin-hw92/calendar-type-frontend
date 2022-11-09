@@ -18,7 +18,7 @@ const CalendarFormContainer = ({children}:any) => {
 
     useEffect(() => {
         setChildrenForm(children[viewForm]);
-    }, [viewForm]);
+    }, [children, viewForm]);
 
     return <CalendarForm>{childrenForm}</CalendarForm>;
 }

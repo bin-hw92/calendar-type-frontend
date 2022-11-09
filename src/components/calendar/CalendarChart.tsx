@@ -21,7 +21,8 @@ const CalendarChart = ({calendarList}:CalendarChartProps) => {
     const dataArr:number[] = [];
 
     /* 추후 수정 필요 효율성 떄문에 수정 필수 */
-    calendarList.map(data => {
+    // eslint-disable-next-line array-callback-return
+    calendarList.map((data:any) => {
         if(!labelArr.includes(data.startDate.month)){
             labelArr.push(data.startDate.month);
         }

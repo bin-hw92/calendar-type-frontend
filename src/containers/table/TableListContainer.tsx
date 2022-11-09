@@ -29,6 +29,7 @@ const TableListContainer = () => {
         // page가 없으면 1을 기본값으로 사용
         const page = parseInt(searchParams.get('page')+'', 10) || 1;
         dispatch(listTable(page));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
      
     useEffect(() => {
@@ -71,6 +72,7 @@ const TableListContainer = () => {
         if(checkError){
             setError([tableId, checkError.response.status === 401? '비밀번호가 틀렸습니다.' : '시스템 에러 발생']);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[checkError]);
 
     useEffect(() => {
