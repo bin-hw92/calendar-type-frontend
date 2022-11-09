@@ -13,4 +13,6 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           runTests: false
-          build: CI='' yarn build
+          build: yarn build
+          env:
+            CI: ""
