@@ -8,10 +8,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
+
       - name: delete all
         run: | 
-          rm -rf ** && find . -name . -o -prune -exec rm -rf -- {} +
+          rm -rf node_modules && rm -rf yarn.lock
+
+      - name: install all
+        run: yarn install
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
