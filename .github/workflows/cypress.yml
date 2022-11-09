@@ -22,5 +22,5 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4.2.0 # use the explicit version number
         with:
-          build: yarn build
+          build: yarn run build
           start: yarn start
