@@ -3,25 +3,23 @@ name: Cypress Tests
 on: [push]
 
 jobs:
+  # install:
+  # ....
   cypress-run:
     runs-on: ubuntu-latest
+    container: cypress/browsers:node12.18.3-chrome87-ff82
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v1
+      - name: Download the build folders
+        uses: actions/download-artifact@v2
         with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
-
-      - name: Install dependencies
-        run: yarn install
+          name: build
+          path: build
 
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
-          start: yarn e2e
+          browser: firefox
+          build: yarn build
